@@ -145,3 +145,9 @@
     @apply min-h-screen font-inter text-fs-400 leading-normal tracking-normal overflow-x-hidden bg-brand-white text-brand-blue-200
   }
 }
+
+@layer components{
+  .custom-container{
+    @apply m-5 p-5
+  }
+}
