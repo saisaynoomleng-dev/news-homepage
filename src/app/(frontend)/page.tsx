@@ -1,3 +1,4 @@
+import Blogs from "@/components/Blogs";
 import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import { Button } from "@/components/ui/button";
@@ -71,9 +72,9 @@ export default async function Home() {
             </div>
           ))}
         </div>
-
-
       </div>
+
+      <Blogs className="col-span-full" />
 
 
 
