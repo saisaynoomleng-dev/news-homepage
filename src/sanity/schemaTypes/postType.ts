@@ -31,7 +31,7 @@ export const postType = defineType({
                 .required()
                 .error('Required to generate on a page'),
             group: 'detail',
-            hidden: ({document}) => !document?.name
+            hidden: ({document}) => !document?.title
         }),
         defineField({
             name: 'summary',

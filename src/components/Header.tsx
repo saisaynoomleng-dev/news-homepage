@@ -1,7 +1,25 @@
+'use client'
+
+import clsx from "clsx"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
+
+type NavLink = {
+    name: string
+    url: string
+}
 
 const Header = () => {
+    const navLinks = [
+        { name: 'home', url: '/' },
+        { name: 'new', url: '/new' },
+        { name: 'popular', url: '/popular' },
+        { name: 'trending', url: '/trending' },
+        { name: 'categories', url: '/categories' },
+    ]
+    const pathname = usePathname();
+
     return (
         <header className="custom-container flex justify-between items-center">
             <Image
@@ -15,15 +33,23 @@ const Header = () => {
                 role="navigation"
                 aria-label="menu">
                 <ul className="flex justify-center items-center gap-5">
-                    <li><Link href={''}>Home</Link></li>
-                    <li><Link href={''}>New</Link></li>
-                    <li><Link href={''}>Popular</Link></li>
-                    <li><Link href={''}>Trending</Link></li>
-                    <li><Link href={''}>Categories</Link></li>
+                    {navLinks.map((link: NavLink) => (
+                        <li
+                            key={link.name}
+                            className={clsx('hover:text-brand-orange',
+                                pathname === link.url && 'text-brand-orange font-semibold'
+                            )}>
+                            <Link
+                                href={link.url}
+                                className="capitalize">
+                                {link.name}
+                            </Link>
+                        </li>
+                    ))
+
+                    }
                 </ul>
-
             </nav>
-
         </header>
     )
 }
