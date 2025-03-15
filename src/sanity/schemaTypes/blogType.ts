@@ -29,7 +29,7 @@ export const blog = defineType({
             validation: rule => rule
                 .required()
                 .error(`Required to generate on the page`),
-            hidden: ({document}) => !document?.name,
+            hidden: ({document}) => !document?.title,
             group: 'detail'
         }),
         defineField({

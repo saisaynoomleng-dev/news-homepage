@@ -186,3 +186,33 @@ export type Slug = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Blog | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./src/sanity/lib/queries.ts
+// Variable: POST_QUERY
+// Query: *[_type == 'post'   && defined(slug.current)]{    title,    summary,    slug   }
+export type POST_QUERYResult = Array<{
+  title: string | null;
+  summary: string | null;
+  slug: Slug | null;
+}>;
+// Variable: BLOG_QUERY
+// Query: *[_type == 'blog'   && defined(slug.current)]{      title,      slug,      summary,      image{        asset->{          url},        alt      }   }
+export type BLOG_QUERYResult = Array<{
+  title: string | null;
+  slug: Slug | null;
+  summary: string | null;
+  image: {
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
+}>;
+
+// Query TypeMap
+import "@sanity/client";
+declare module "@sanity/client" {
+  interface SanityQueries {
+    "*[_type == 'post'\n   && defined(slug.current)]{\n    title,\n    summary,\n    slug\n   }": POST_QUERYResult;
+    "*[_type == 'blog'\n   && defined(slug.current)]{\n      title,\n      slug,\n      summary,\n      image{\n        asset->{\n          url},\n        alt\n      }\n   }": BLOG_QUERYResult;
+  }
+}
